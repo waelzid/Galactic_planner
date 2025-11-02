@@ -5,7 +5,7 @@ export const sampleEvents: Event[] = [
     id: '1',
     title: 'Team Meeting',
     date: new Date(2025, 9, 22),
-    color: 'bg-blue-500',
+    color: 'bg-galactic-gold',
     location: 'Conference Room A',
     description: 'Weekly team sync'
   },
@@ -13,14 +13,14 @@ export const sampleEvents: Event[] = [
     id: '2',
     title: 'Project Deadline',
     date: new Date(2025, 9, 25),
-    color: 'bg-red-500',
+    color: 'bg-red-600',
     description: 'Final submission'
   },
   {
     id: '3',
     title: 'Client Call',
     date: new Date(2025, 9, 23),
-    color: 'bg-green-500',
+    color: 'bg-galactic-navy',
     location: 'Zoom',
     description: 'Q4 planning discussion'
   },
@@ -28,14 +28,14 @@ export const sampleEvents: Event[] = [
     id: '4',
     title: 'Design Review',
     date: new Date(2025, 9, 28),
-    color: 'bg-purple-500',
+    color: 'bg-purple-600',
     description: 'Review new mockups'
   },
   {
     id: '5',
     title: 'Launch Party',
     date: new Date(2025, 9, 30),
-    color: 'bg-orange-500',
+    color: 'bg-galactic-gold',
     location: 'Downtown Office',
     description: 'Celebrate product launch'
   },
