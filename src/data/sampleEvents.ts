@@ -3,40 +3,69 @@ import type { Event } from '../types';
 export const sampleEvents: Event[] = [
   {
     id: '1',
-    title: 'Team Meeting',
-    date: new Date(2025, 9, 22),
+    title: 'Mercury Retrograde Begins',
+    date: new Date(2025, 9, 22, 9, 0),
     color: 'bg-galactic-gold',
-    location: 'Conference Room A',
-    description: 'Weekly team sync'
+    location: 'Gemini Constellation',
+    description: 'Communication planet goes retrograde - review contracts carefully',
+    startTime: '09:00',
+    endTime: '10:00'
   },
   {
     id: '2',
-    title: 'Project Deadline',
-    date: new Date(2025, 9, 25),
+    title: 'Full Moon in Aries',
+    date: new Date(2025, 9, 25, 17, 0),
     color: 'bg-red-600',
-    description: 'Final submission'
+    description: 'Powerful full moon brings energy for new beginnings',
+    startTime: '17:00',
+    endTime: '18:00'
   },
   {
     id: '3',
-    title: 'Client Call',
-    date: new Date(2025, 9, 23),
+    title: 'Venus Enters Libra',
+    date: new Date(2025, 9, 23, 14, 0),
     color: 'bg-galactic-navy',
-    location: 'Zoom',
-    description: 'Q4 planning discussion'
+    location: 'Libra Constellation',
+    description: 'Love and beauty planet returns home - harmony in relationships',
+    startTime: '14:00',
+    endTime: '15:30'
   },
   {
     id: '4',
-    title: 'Design Review',
-    date: new Date(2025, 9, 28),
+    title: 'Solar Eclipse in Scorpio',
+    date: new Date(2025, 9, 28, 11, 0),
     color: 'bg-purple-600',
-    description: 'Review new mockups'
+    description: 'Transformative solar eclipse - perfect for shadow work',
+    startTime: '11:00',
+    endTime: '12:00'
   },
   {
     id: '5',
-    title: 'Launch Party',
-    date: new Date(2025, 9, 30),
+    title: 'Perseid Meteor Shower Peak',
+    date: new Date(2025, 9, 30, 18, 0),
     color: 'bg-galactic-gold',
-    location: 'Downtown Office',
-    description: 'Celebrate product launch'
+    location: 'Northern Hemisphere',
+    description: 'Annual meteor shower at its brightest - make wishes!',
+    startTime: '18:00',
+    endTime: '21:00'
+  },
+  {
+    id: '6',
+    title: 'Jupiter Trine Saturn',
+    date: new Date(2025, 9, 22, 10, 0),
+    color: 'bg-galactic-navy',
+    description: 'Harmonious aspect between expansion and structure planets',
+    startTime: '10:00',
+    endTime: '10:15'
+  },
+  {
+    id: '7',
+    title: 'New Moon in Virgo',
+    date: new Date(2025, 9, 22, 12, 0),
+    color: 'bg-green-600',
+    location: 'Virgo Constellation',
+    description: 'Perfect time for setting practical goals and organization',
+    startTime: '12:00',
+    endTime: '13:00'
   },
 ];

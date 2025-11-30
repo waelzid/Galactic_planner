@@ -1,123 +1,154 @@
-import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import type { Event, DateRange } from '../../types';
+import React, { useState } from 'react';
+import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
+import type { Event, DateRange, CalendarViewType } from '../../types';
 import { useCalendar } from '../../hooks/useCalendar';
-import { getDaysInMonth, isToday, isSameMonth, getMonthYear } from '../../utils/dateUtils';
-import { getEventsForDate } from '../../utils/eventUtils';
+import { getMonthYear, formatDayHeader } from '../../utils/dateUtils';
+import { DayView } from './DayView';
+import { WeekView } from './WeekView';
+import { MonthView } from './MonthView';
 
 interface CalendarViewProps {
   events: Event[];
   onDateSelect?: (range: DateRange) => void;
 }
 
-const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
 export const CalendarView: React.FC<CalendarViewProps> = ({ events, onDateSelect }) => {
+  const [calendarView, setCalendarView] = useState<CalendarViewType>('month');
+  
   const {
     currentMonth,
     hoverDate,
     setHoverDate,
     navigateMonth,
-    handleDateClick: handleCalendarDateClick,
+    goToToday,
+    handleDateClick,
     isDateInRange,
     isStartDate,
     isEndDate,
   } = useCalendar();
 
-  const handleDateClick = (date: Date) => {
-    handleCalendarDateClick(date);
+  const getHeaderText = () => {
+    switch (calendarView) {
+      case 'day':
+        return formatDayHeader(currentMonth);
+      case 'week':
+        return getMonthYear(currentMonth);
+      case 'month':
+        return getMonthYear(currentMonth);
+    }
   };
 
-  const days = getDaysInMonth(currentMonth);
-  const monthYear = getMonthYear(currentMonth);
+  const navigateCalendar = (direction: 'prev' | 'next') => {
+    const newDate = new Date(currentMonth);
+    
+    switch (calendarView) {
+      case 'day':
+        newDate.setDate(currentMonth.getDate() + (direction === 'next' ? 1 : -1));
+        break;
+      case 'week':
+        newDate.setDate(currentMonth.getDate() + (direction === 'next' ? 7 : -7));
+        break;
+      case 'month':
+        newDate.setMonth(currentMonth.getMonth() + (direction === 'next' ? 1 : -1));
+        break;
+    }
+    
+    navigateMonth(direction);
+  };
 
   return (
-    <div className="bg-galactic-cream rounded-lg shadow-lg border-2 border-galactic-gold overflow-hidden">
-      {/* Calendar Header */}
-      <div className="bg-gradient-to-r from-galactic-cream-dark to-galactic-cream px-6 py-4 border-b-2 border-galactic-gold">
-        <div className="flex items-center justify-between">
-          <button 
-            onClick={() => navigateMonth('prev')} 
-            className="p-2 hover:bg-galactic-gold/20 rounded-md transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6 text-galactic-gold" />
-          </button>
-          
-          <div className="text-center">
-            <div className="flex justify-center mb-2">
-              <svg width="60" height="15" viewBox="0 0 60 15">
-                <path d="M0 7 Q15 3 30 7 T60 7" stroke="#C9A961" strokeWidth="1" fill="none"/>
-                <circle cx="30" cy="7" r="2" fill="#C9A961"/>
-              </svg>
-            </div>
-            <h2 className="text-2xl font-bold text-galactic-navy font-serif">{monthYear}</h2>
-          </div>
-          
-          <button 
-            onClick={() => navigateMonth('next')} 
-            className="p-2 hover:bg-galactic-gold/20 rounded-md transition-colors"
-          >
-            <ChevronRight className="w-6 h-6 text-galactic-gold" />
-          </button>
-        </div>
-      </div>
-
-      {/* Calendar Grid */}
-      <div className="p-6">
-        {/* Week Day Headers */}
-        <div className="grid grid-cols-7 gap-2 mb-4">
-          {weekDays.map(day => (
-            <div
-              key={day}
-              className="text-center text-sm font-bold text-galactic-gold py-2 font-serif tracking-wider"
+    <div className="space-y-4">
+      {/* View Controls */}
+      <div className="bg-galactic-cream rounded-lg shadow-lg border-2 border-galactic-gold p-4">
+        <div className="flex items-center justify-between flex-wrap gap-4">
+          {/* Navigation */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigateCalendar('prev')}
+              className="p-2 hover:bg-galactic-gold/20 rounded-md transition-colors"
             >
-              {day}
+              <ChevronLeft className="w-6 h-6 text-galactic-gold" />
+            </button>
+            
+            <div className="text-center min-w-[200px]">
+              <h2 className="text-xl font-bold text-galactic-navy font-serif">{getHeaderText()}</h2>
             </div>
-          ))}
-        </div>
+            
+            <button
+              onClick={() => navigateCalendar('next')}
+              className="p-2 hover:bg-galactic-gold/20 rounded-md transition-colors"
+            >
+              <ChevronRight className="w-6 h-6 text-galactic-gold" />
+            </button>
+          </div>
 
-        {/* Calendar Days */}
-        <div className="grid grid-cols-7 gap-2">
-          {days.map((date, index) => {
-            if (!date) return <div key={`empty-${index}`} className="aspect-square" />;
-
-            const inRange = isDateInRange(date);
-            const isStart = isStartDate(date);
-            const isEnd = isEndDate(date);
-            const today = isToday(date);
-            const sameMonth = isSameMonth(date, currentMonth);
-            const dateEvents = getEventsForDate(events, date);
-
-            return (
+          {/* View Type Toggle */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={goToToday}
+              className="px-4 py-2 text-sm font-medium text-galactic-gold border-2 border-galactic-gold rounded-md hover:bg-galactic-gold hover:text-white transition-colors font-serif"
+            >
+              Today
+            </button>
+            
+            <div className="flex border-2 border-galactic-gold rounded-md overflow-hidden">
               <button
-                key={index}
-                onClick={() => handleDateClick(date)}
-                onMouseEnter={() => setHoverDate(date)}
-                onMouseLeave={() => setHoverDate(null)}
-                disabled={!sameMonth}
-                className={`
-                  aspect-square rounded-md flex flex-col items-center justify-center text-sm font-medium
-                  transition-all duration-150 relative border-2
-                  ${!sameMonth ? 'text-galactic-navy/30 cursor-default border-transparent' : 'text-galactic-navy cursor-pointer border-galactic-gold/20'}
-                  ${today && sameMonth ? 'ring-2 ring-galactic-gold' : ''}
-                  ${inRange && sameMonth ? 'bg-galactic-gold/20' : ''}
-                  ${(isStart || isEnd) && sameMonth ? 'bg-galactic-gold text-white border-galactic-gold hover:bg-galactic-gold-dark' : ''}
-                  ${!inRange && !isStart && !isEnd && sameMonth ? 'hover:bg-galactic-beige' : ''}
-                `}
+                onClick={() => setCalendarView('day')}
+                className={`px-4 py-2 text-sm font-medium transition-colors font-serif ${
+                  calendarView === 'day'
+                    ? 'bg-galactic-gold text-white'
+                    : 'text-galactic-navy hover:bg-galactic-beige'
+                }`}
               >
-                <span className="font-serif">{date.getDate()}</span>
-                {dateEvents.length > 0 && (
-                  <div className="flex gap-0.5 mt-1">
-                    {dateEvents.slice(0, 3).map(e => (
-                      <div key={e.id} className={`w-1.5 h-1.5 rounded-full ${e.color} ring-1 ring-galactic-gold/30`} />
-                    ))}
-                  </div>
-                )}
+                Day
               </button>
-            );
-          })}
+              <button
+                onClick={() => setCalendarView('week')}
+                className={`px-4 py-2 text-sm font-medium border-x-2 border-galactic-gold transition-colors font-serif ${
+                  calendarView === 'week'
+                    ? 'bg-galactic-gold text-white'
+                    : 'text-galactic-navy hover:bg-galactic-beige'
+                }`}
+              >
+                Week
+              </button>
+              <button
+                onClick={() => setCalendarView('month')}
+                className={`px-4 py-2 text-sm font-medium transition-colors font-serif ${
+                  calendarView === 'month'
+                    ? 'bg-galactic-gold text-white'
+                    : 'text-galactic-navy hover:bg-galactic-beige'
+                }`}
+              >
+                Month
+              </button>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Calendar Views */}
+      {calendarView === 'day' && (
+        <DayView currentDate={currentMonth} events={events} />
+      )}
+      
+      {calendarView === 'week' && (
+        <WeekView currentDate={currentMonth} events={events} />
+      )}
+      
+      {calendarView === 'month' && (
+        <MonthView
+          currentMonth={currentMonth}
+          events={events}
+          selectedRange={{ start: null, end: null }}
+          hoverDate={hoverDate}
+          onDateClick={handleDateClick}
+          onDateHover={setHoverDate}
+          isDateInRange={isDateInRange}
+          isStartDate={isStartDate}
+          isEndDate={isEndDate}
+        />
+      )}
     </div>
   );
 };

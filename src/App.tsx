@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import { ProtectedRoute } from './components/Auth/ProtectedRoute';
+import { LoginPage } from './components/Auth/LoginPage';
 import { Sidebar } from './components/Layout/Sidebar';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { CalendarView } from './components/Calendar/CalendarView';
@@ -7,8 +11,9 @@ import { SettingsPage } from './components/Settings/SettingsPage';
 import type { ViewType, DateRange } from './types';
 import { sampleEvents } from './data/sampleEvents';
 import { formatDateRange } from './utils/dateUtils';
+import BirthChart from './components/BirthChart/BirthChart';
 
-const App: React.FC = () => {
+const MainApp: React.FC = () => {
   const [currentView, setCurrentView] = useState<ViewType>('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [selectedRange, setSelectedRange] = useState<DateRange>({ start: null, end: null });
@@ -28,7 +33,6 @@ const App: React.FC = () => {
           
           {currentView === 'calendar' && (
             <div className="space-y-8">
-              {/* Header with ornamental design */}
               <div className="text-center">
                 <div className="flex justify-center mb-4">
                   <svg width="300" height="60" viewBox="0 0 300 60">
@@ -65,9 +69,32 @@ const App: React.FC = () => {
 
           {currentView === 'events' && <EventsPage events={sampleEvents} />}
           {currentView === 'settings' && <SettingsPage />}
+          {currentView === 'birthChart' && <BirthChart />}
         </div>
       </main>
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <MainApp />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 };
 
