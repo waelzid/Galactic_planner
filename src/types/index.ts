@@ -10,8 +10,7 @@ export interface Event {
   color: string;
   location?: string;
   description?: string;
-  startTime?: string;
-  endTime?: string;
+  // REMOVED: startTime and endTime (events are full-day now)
 }
 
 export interface NavigationItem {
@@ -20,8 +19,6 @@ export interface NavigationItem {
   icon: any;
 }
 
-export type ViewType = 'birthChart' | 'dashboard' | 'calendar' | 'events' | 'settings';
+export type ViewType = 'dashboard' | 'calendar' | 'events' | 'birthchart' | 'profile' | 'settings';
 
-// NEW: Calendar view types
 export type CalendarViewType = 'day' | 'week' | 'month';
-

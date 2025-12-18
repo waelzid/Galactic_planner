@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "calendar": "Calendrier",
+    "events": "Événements",
+    "birthchart": "Thème Natal",
+    "settings": "Paramètres",
+    "logout": "Déconnexion"
+  },
+  "login": {
+    "title": "Se Connecter",
+    "subtitle": "Entrez vos identifiants cosmiques",
+    "email": "Adresse Email",
+    "password": "Mot de passe",
+    "emailPlaceholder": "admin@galactic.com",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "signInButton": "Se Connecter",
+    "signingIn": "Connexion...",
+    "error": "Email ou mot de passe invalide",
+    "demoTitle": "Identifiants de Démonstration:",
+    "planYourCosmos": "Planifiez Votre Cosmos"
+  },
+  "dashboard": {
+    "title": "Tableau de Bord",
+    "subtitle": "Bienvenue dans votre voyage cosmique",
+    "totalEvents": "Total Événements",
+    "upcoming": "À Venir",
+    "thisWeek": "Cette Semaine",
+    "upcomingEvents": "Événements à Venir",
+    "noEvents": "Aucun événement à venir dans votre calendrier cosmique"
+  },
+  "calendar": {
+    "title": "Calendrier",
+    "selectedRange": "Plage Sélectionnée",
+    "noSelection": "Aucune date sélectionnée",
+    "today": "Aujourd'hui",
+    "day": "Jour",
+    "week": "Semaine",
+    "month": "Mois",
+    "weekdays": {
+      "sun": "Dim",
+      "mon": "Lun",
+      "tue": "Mar",
+      "wed": "Mer",
+      "thu": "Jeu",
+      "fri": "Ven",
+      "sat": "Sam"
+    }
+  },
+  "events": {
+    "title": "Tous les Événements",
+    "subtitle": "Votre planning cosmique",
+    "noEvents": "Aucun événement trouvé dans votre journal céleste",
+    "location": "Lieu"
+  },
+  "birthchart": {
+    "title": "Thème Natal",
+    "subtitle": "Votre Plan Cosmique"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "subtitle": "Personnalisez votre expérience cosmique",
+    "timezone": "Fuseau Horaire",
+    "weekStart": "La semaine commence le",
+    "theme": "Thème du Calendrier",
+    "language": "Langue",
+    "savePreferences": "Enregistrer les Préférences",
+    "sunday": "Dimanche",
+    "monday": "Lundi"
+  },
+  "common": {
+    "loading": "Chargement de votre cosmos...",
+    "loggedInAs": "Connecté en tant que",
+    "confirmLogout": "Êtes-vous sûr de vouloir vous déconnecter?"
+  }
+}

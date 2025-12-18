@@ -1,6 +1,7 @@
 import React from 'react';
-import { Home, Calendar, Clock, Settings, Menu, X, LogOut,Star } from 'lucide-react';
+import { Home, Calendar, Clock, Settings, Menu, X, LogOut,Star, UserCircle } from 'lucide-react';
 import type { ViewType, NavigationItem } from '../../types';
+import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
 
 interface SidebarProps {
@@ -14,6 +15,7 @@ const navigationItems: NavigationItem[] = [
   { id: 'birthChart', label: 'Birth Chart', icon: Star },
   { id: 'dashboard', label: 'Dashboard', icon: Home },
   { id: 'calendar', label: 'Calendar', icon: Calendar },
+  { id: 'profile', label: 'My Profile', icon: UserCircle },
   { id: 'events', label: 'Events', icon: Clock },
   { id: 'settings', label: 'Settings', icon: Settings },
 ];
@@ -25,9 +27,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onToggleSidebar,
 }) => {
   const { logout, user } = useAuth();
+  const { t } = useTranslation();
 
   const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
+    if (window.confirm(t('common.confirmLogout'))) {
       logout();
     }
   };
@@ -61,7 +64,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* User Info */}
       {sidebarOpen && user && (
         <div className="px-4 py-3 border-b-2 border-galactic-gold bg-galactic-beige/30">
-          <p className="text-xs text-galactic-navy/60 font-serif">Logged in as</p>
+          <p className="text-xs text-galactic-navy/60 font-serif">{t('common.loggedInAs')}</p>
           <p className="text-sm font-semibold text-galactic-navy truncate">{user.name}</p>
           <p className="text-xs text-galactic-navy/60 truncate">{user.email}</p>
         </div>

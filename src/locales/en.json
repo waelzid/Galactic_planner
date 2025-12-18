@@ -1,0 +1,76 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "calendar": "Calendar",
+    "events": "Events",
+    "birthchart": "Birth Chart",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "login": {
+    "title": "Sign In",
+    "subtitle": "Enter your cosmic credentials",
+    "email": "Email Address",
+    "password": "Password",
+    "emailPlaceholder": "admin@galactic.com",
+    "passwordPlaceholder": "Enter your password",
+    "signInButton": "Sign In",
+    "signingIn": "Signing in...",
+    "error": "Invalid email or password",
+    "demoTitle": "Demo Credentials:",
+    "planYourCosmos": "Plan Your Cosmos"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "subtitle": "Welcome to your cosmic journey",
+    "totalEvents": "Total Events",
+    "upcoming": "Upcoming",
+    "thisWeek": "This Week",
+    "upcomingEvents": "Upcoming Events",
+    "noEvents": "No upcoming events in your cosmic calendar"
+  },
+  "calendar": {
+    "title": "Calendar",
+    "selectedRange": "Selected Range",
+    "noSelection": "No date selected",
+    "today": "Today",
+    "day": "Day",
+    "week": "Week",
+    "month": "Month",
+    "weekdays": {
+      "sun": "Sun",
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat"
+    }
+  },
+  "events": {
+    "title": "All Events",
+    "subtitle": "Your cosmic schedule",
+    "noEvents": "No events found in your celestial log",
+    "location": "Location"
+  },
+  "birthchart": {
+    "title": "Birth Chart",
+    "subtitle": "Your Cosmic Plan"
+  },
+  "settings": {
+    "title": "Settings",
+    "subtitle": "Customize your cosmic experience",
+    "timezone": "Time Zone",
+    "weekStart": "Week starts on",
+    "theme": "Calendar Theme",
+    "language": "Language",
+    "savePreferences": "Save Preferences",
+    "sunday": "Sunday",
+    "monday": "Monday"
+  },
+  "common": {
+    "loading": "Loading your cosmos...",
+    "loggedInAs": "Logged in as",
+    "confirmLogout": "Are you sure you want to log out?"
+  }
+}

@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, Calendar as CalendarIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Event, DateRange, CalendarViewType } from '../../types';
 import { useCalendar } from '../../hooks/useCalendar';
-import { getMonthYear, formatDayHeader } from '../../utils/dateUtils';
-import { DayView } from './DayView';
+import { getMonthYear } from '../../utils/dateUtils';
 import { WeekView } from './WeekView';
 import { MonthView } from './MonthView';
 
@@ -27,30 +26,15 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ events, onDateSelect
     isEndDate,
   } = useCalendar();
 
-  const getHeaderText = () => {
-    switch (calendarView) {
-      case 'day':
-        return formatDayHeader(currentMonth);
-      case 'week':
-        return getMonthYear(currentMonth);
-      case 'month':
-        return getMonthYear(currentMonth);
-    }
-  };
+  const monthYear = getMonthYear(currentMonth);
 
   const navigateCalendar = (direction: 'prev' | 'next') => {
     const newDate = new Date(currentMonth);
     
-    switch (calendarView) {
-      case 'day':
-        newDate.setDate(currentMonth.getDate() + (direction === 'next' ? 1 : -1));
-        break;
-      case 'week':
-        newDate.setDate(currentMonth.getDate() + (direction === 'next' ? 7 : -7));
-        break;
-      case 'month':
-        newDate.setMonth(currentMonth.getMonth() + (direction === 'next' ? 1 : -1));
-        break;
+    if (calendarView === 'week') {
+      newDate.setDate(currentMonth.getDate() + (direction === 'next' ? 7 : -7));
+    } else {
+      newDate.setMonth(currentMonth.getMonth() + (direction === 'next' ? 1 : -1));
     }
     
     navigateMonth(direction);
@@ -71,7 +55,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ events, onDateSelect
             </button>
             
             <div className="text-center min-w-[200px]">
-              <h2 className="text-xl font-bold text-galactic-navy font-serif">{getHeaderText()}</h2>
+              <h2 className="text-xl font-bold text-galactic-navy font-serif">{monthYear}</h2>
             </div>
             
             <button
@@ -93,18 +77,8 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ events, onDateSelect
             
             <div className="flex border-2 border-galactic-gold rounded-md overflow-hidden">
               <button
-                onClick={() => setCalendarView('day')}
-                className={`px-4 py-2 text-sm font-medium transition-colors font-serif ${
-                  calendarView === 'day'
-                    ? 'bg-galactic-gold text-white'
-                    : 'text-galactic-navy hover:bg-galactic-beige'
-                }`}
-              >
-                Day
-              </button>
-              <button
                 onClick={() => setCalendarView('week')}
-                className={`px-4 py-2 text-sm font-medium border-x-2 border-galactic-gold transition-colors font-serif ${
+                className={`px-4 py-2 text-sm font-medium transition-colors font-serif ${
                   calendarView === 'week'
                     ? 'bg-galactic-gold text-white'
                     : 'text-galactic-navy hover:bg-galactic-beige'
@@ -114,7 +88,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ events, onDateSelect
               </button>
               <button
                 onClick={() => setCalendarView('month')}
-                className={`px-4 py-2 text-sm font-medium transition-colors font-serif ${
+                className={`px-4 py-2 text-sm font-medium border-l-2 border-galactic-gold transition-colors font-serif ${
                   calendarView === 'month'
                     ? 'bg-galactic-gold text-white'
                     : 'text-galactic-navy hover:bg-galactic-beige'
@@ -128,10 +102,6 @@ export const CalendarView: React.FC<CalendarViewProps> = ({ events, onDateSelect
       </div>
 
       {/* Calendar Views */}
-      {calendarView === 'day' && (
-        <DayView currentDate={currentMonth} events={events} />
-      )}
-      
       {calendarView === 'week' && (
         <WeekView currentDate={currentMonth} events={events} />
       )}

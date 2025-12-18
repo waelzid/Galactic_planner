@@ -1,6 +1,13 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import type { User, LoginCredentials, AuthContextType } from '../types/auth';
-import { loginUser, logoutUser, getCurrentUser } from '../services/authService';
+import type { User, LoginCredentials, SignUpData, UpdateUserData, ChangePasswordData, AuthContextType } from '../types/auth';
+import { 
+  loginUser, 
+  signupUser, 
+  logoutUser, 
+  getCurrentUser,
+  updateUserProfile,
+  changeUserPassword 
+} from '../services/authService';
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
@@ -9,7 +16,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is already logged in
     const currentUser = getCurrentUser();
     if (currentUser) {
       setUser(currentUser);
@@ -19,10 +25,34 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const login = async (credentials: LoginCredentials) => {
     try {
-      console.log("AuthContext: Calling loginUser with credentials")
       const userData = await loginUser(credentials);
-      console.log('Logged in user:', userData);
       setUser(userData);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const signup = async (data: SignUpData) => {
+    try {
+      const userData = await signupUser(data);
+      setUser(userData);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const updateUser = async (data: UpdateUserData) => {
+    try {
+      const updatedUser = await updateUserProfile(data);
+      setUser(updatedUser);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const changePassword = async (data: ChangePasswordData) => {
+    try {
+      await changeUserPassword(data);
     } catch (error) {
       throw error;
     }
@@ -36,7 +66,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const value: AuthContextType = {
     user,
     login,
+    signup,
     logout,
+    updateUser,
+    changePassword,
     isAuthenticated: !!user,
     isLoading,
   };

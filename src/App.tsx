@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/Auth/ProtectedRoute';
 import { LoginPage } from './components/Auth/LoginPage';
+import { SignUpPage } from './components/Auth/SignUpPage'; 
 import { Sidebar } from './components/Layout/Sidebar';
 import { Dashboard } from './components/Dashboard/Dashboard';
 import { CalendarView } from './components/Calendar/CalendarView';
 import { EventsPage } from './components/Events/EventsPage';
+import { UserProfilePage } from './components/Profile/UserProfilePage'; 
 import { SettingsPage } from './components/Settings/SettingsPage';
 import type { ViewType, DateRange } from './types';
 import { sampleEvents } from './data/sampleEvents';
@@ -68,8 +70,9 @@ const MainApp: React.FC = () => {
           )}
 
           {currentView === 'events' && <EventsPage events={sampleEvents} />}
+          {currentView === 'birthchart' && <BirthChart />}
+          {currentView === 'profile' && <UserProfilePage />} {/* NEW */}
           {currentView === 'settings' && <SettingsPage />}
-          {currentView === 'birthChart' && <BirthChart />}
         </div>
       </main>
     </div>
@@ -82,6 +85,7 @@ const App: React.FC = () => {
       <Router>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} /> {/* NEW */}
           <Route
             path="/dashboard"
             element={

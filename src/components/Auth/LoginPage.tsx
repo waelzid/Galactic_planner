@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { LogIn, Mail, Lock, AlertCircle } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,12 +18,10 @@ export const LoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      console.log("before login function call ")
-      await login({ username, password });
-
+      await login({ email, password });
       navigate('/dashboard');
     } catch (err) {
-      setError('Invalid Username or password');
+      setError('Invalid email or password');
     } finally {
       setIsLoading(false);
     }
@@ -101,23 +99,21 @@ export const LoginPage: React.FC = () => {
 
             {/* Login Form */}
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Username Field */}
+              {/* Email Field */}
               <div>
                 <label className="block text-sm font-semibold text-galactic-navy mb-2 font-serif">
-                  Username 
+                  Email Address
                 </label>
                 <div className="relative">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <Mail className="h-5 w-5 text-galactic-gold" />
                   </div>
                   <input
-                    type="text"
-                    name="username"
-                    autoComplete="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 border-2 border-galactic-gold rounded-md bg-white text-galactic-navy placeholder-galactic-navy/50 focus:outline-none focus:ring-2 focus:ring-galactic-gold font-serif"
-                    placeholder="admin"
+                    placeholder="admin@galactic.com"
                     required
                   />
                 </div>
@@ -163,12 +159,22 @@ export const LoginPage: React.FC = () => {
               </button>
             </form>
 
+            {/* Sign Up Link */}
+            <div className="mt-6 text-center">
+              <p className="text-sm text-galactic-navy/70 font-serif">
+                Don't have an account?{' '}
+                <Link to="/signup" className="text-galactic-gold hover:text-galactic-gold-dark font-semibold">
+                  Create Account
+                </Link>
+              </p>
+            </div>
+
             {/* Demo Credentials */}
             <div className="mt-6 p-4 bg-galactic-gold/10 border border-galactic-gold/30 rounded-md">
               <p className="text-xs text-galactic-navy/70 font-serif text-center">
                 <span className="font-semibold">Demo Credentials:</span>
                 <br />
-                Username: admin@galactic.com
+                Email: admin@galactic.com
                 <br />
                 Password: admin123
               </p>

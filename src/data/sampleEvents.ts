@@ -7,9 +7,7 @@ export const sampleEvents: Event[] = [
     date: new Date(2025, 9, 22, 9, 0),
     color: 'bg-galactic-gold',
     location: 'Gemini Constellation',
-    description: 'Communication planet goes retrograde - review contracts carefully',
-    startTime: '09:00',
-    endTime: '10:00'
+    description: 'Communication planet goes retrograde - review contracts carefully'
   },
   {
     id: '2',
@@ -17,8 +15,6 @@ export const sampleEvents: Event[] = [
     date: new Date(2025, 9, 25, 17, 0),
     color: 'bg-red-600',
     description: 'Powerful full moon brings energy for new beginnings',
-    startTime: '17:00',
-    endTime: '18:00'
   },
   {
     id: '3',
@@ -26,18 +22,14 @@ export const sampleEvents: Event[] = [
     date: new Date(2025, 9, 23, 14, 0),
     color: 'bg-galactic-navy',
     location: 'Libra Constellation',
-    description: 'Love and beauty planet returns home - harmony in relationships',
-    startTime: '14:00',
-    endTime: '15:30'
+    description: 'Love and beauty planet returns home - harmony in relationships'
   },
   {
     id: '4',
     title: 'Solar Eclipse in Scorpio',
     date: new Date(2025, 9, 28, 11, 0),
     color: 'bg-purple-600',
-    description: 'Transformative solar eclipse - perfect for shadow work',
-    startTime: '11:00',
-    endTime: '12:00'
+    description: 'Transformative solar eclipse - perfect for shadow work'
   },
   {
     id: '5',
@@ -45,18 +37,14 @@ export const sampleEvents: Event[] = [
     date: new Date(2025, 9, 30, 18, 0),
     color: 'bg-galactic-gold',
     location: 'Northern Hemisphere',
-    description: 'Annual meteor shower at its brightest - make wishes!',
-    startTime: '18:00',
-    endTime: '21:00'
+    description: 'Annual meteor shower at its brightest - make wishes!'
   },
   {
     id: '6',
     title: 'Jupiter Trine Saturn',
     date: new Date(2025, 9, 22, 10, 0),
     color: 'bg-galactic-navy',
-    description: 'Harmonious aspect between expansion and structure planets',
-    startTime: '10:00',
-    endTime: '10:15'
+    description: 'Harmonious aspect between expansion and structure planets'
   },
   {
     id: '7',
@@ -64,8 +52,7 @@ export const sampleEvents: Event[] = [
     date: new Date(2025, 9, 22, 12, 0),
     color: 'bg-green-600',
     location: 'Virgo Constellation',
-    description: 'Perfect time for setting practical goals and organization',
-    startTime: '12:00',
-    endTime: '13:00'
+    description: 'Perfect time for setting practical goals and organization'
   },
 ];
+
